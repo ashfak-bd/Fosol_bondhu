@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#2f6b3a">
+<meta name="description" content="কৃষকের জন্য কীটনাশক ও ছত্রাকনাশক খুঁজে পাওয়ার AI সহায়ক অ্যাপ">
+
+<!-- PWA: Android/Chrome ইনস্টলযোগ্যতার জন্য -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+
+<!-- iOS Safari "Add to Home Screen" সাপোর্ট -->
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ফসল বন্ধু">
+
+<title>ফসল বন্ধু — কৃষি সহায়ক AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ================= হেডার + সার্চ ================= -->
+    <div class="app-header">
+      <div class="header-top">
+        <div class="brand">
+          <div class="brand-mark">🌾</div>
+          <div>
+            <div class="brand-name font-display">ফসল বন্ধু</div>
+            <div class="brand-tag">কৃষি সহায়ক অ্যাসিস্ট্যান্ট</div>
+          </div>
+        </div>
+        <button class="ai-badge install-btn" id="installBtn"><span class="dot"></span> অ্যাপ ইনস্টল করুন</button>
+      </div>
+      <div class="header-title font-display">ফসলের রোগ বা ওষুধের নাম<br>লিখুন, না হয় বলুন 🎙️</div>
+      <div class="header-sub" id="dataBadge">ডেটা লোড হচ্ছে...</div>
+    </div>
+
+    <div class="search-wrap">
+      <div class="search-capsule" id="searchCapsule">
+        <input type="text" id="searchInput" class="search-input" placeholder="যেমন: মাজরা পোকা, Fipronil, লেট ব্লাইট...">
+        <button class="mic-btn" id="micBtn" aria-label="ভয়েস সার্চ">
+          <span class="mic-ripple"></span>
+          <span class="mic-ripple r2"></span>
+          🎤
+        </button>
+      </div>
+      <div class="listening-hint" id="listeningHint">🔴 শুনছি... এখন বলুন</div>
+    </div>
+
+    <!-- ================= ক্যাটাগরি ফিল্টার ================= -->
+    <div class="chip-row">
+      <button class="chip active" data-cat="all">সব ধরন</button>
+      <button class="chip" data-cat="insecticide">🐛 কীটনাশক</button>
+      <button class="chip" data-cat="fungicide">🍄 ছত্রাকনাশক</button>
+      <button class="chip" data-cat="herbicide">🌾 আগাছানাশক</button>
+      <button class="chip" data-cat="acaricide">🕷️ মাকড়নাশক</button>
+    </div>
+
+    <!-- ================= কুইক উদাহরণ ================= -->
+    <div class="examples">
+      <div class="examples-label">টেস্ট করে দেখুন —</div>
+      <span class="example-chip" data-term="মাজরা পোকা">মাজরা পোকা</span>
+      <span class="example-chip" data-term="Fipronil">Fipronil</span>
+      <span class="example-chip" data-term="ফিপ্রোনিল">ফিপ্রোনিল (বাংলায়)</span>
+      <span class="example-chip" data-term="fiproneel">fiproneel (বানান ভুল)</span>
+      <span class="example-chip" data-term="লেট ব্লাইট">লেট ব্লাইট</span>
+      <span class="example-chip" data-term="সাদা মাছি">সাদা মাছি</span>
+      <span class="example-chip" data-term="agacha">agacha (Banglish)</span>
+    </div>
+
+    <!-- ================= সাজেশন + ফলাফল ================= -->
+    <div id="suggestBox"></div>
+    <div class="results-meta" id="resultsMeta"></div>
+    <div class="results" id="results"></div>
+
+  </div>
+
+  <!-- ================= বটম ন্যাভ ================= -->
+  <div class="bottom-nav">
+    <button class="nav-item active" data-nav="home"><span class="nav-ico">🏠</span> হোম</button>
+    <button class="nav-item" data-nav="history"><span class="nav-ico">🕘</span> ইতিহাস</button>
+    <button class="nav-item" data-nav="scan"><span class="nav-ico">📷</span> ছবি স্ক্যান</button>
+    <button class="nav-item" data-nav="expert"><span class="nav-ico">👨‍🌾</span> বিশেষজ্ঞ</button>
+    <button class="nav-item" data-nav="profile"><span class="nav-ico">👤</span> প্রোফাইল</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="fallback-data.js"></script>
+  <script src="data-loader.js"></script>
+  <script src="search-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
